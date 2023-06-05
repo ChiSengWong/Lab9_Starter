@@ -61,7 +61,7 @@
           <option>*</option>
           <option>/</option>
         </select>
-        <input name="second-num" id="second-num" />
+        <input name="second-num" id="second-num"       />
         <button id="calculate">Calculate</button>
         <br />
         <output></output>
@@ -95,13 +95,76 @@
       let firstNum = document.querySelector('#first-num').value;
       let secondNum = document.querySelector('#second-num').value;
       let operator = document.querySelector('#operator').value;
-      output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+        output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
     });
 
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
+    // Event listeners for error buttons
+    errorBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const btnText = btn.textContent;
+        switch (btnText) {
+          case 'Console Log':
+            console.log('log');
+            break;
+          case 'Console Error':
+            console.error('error');
+            break;
+          case 'Console Count':
+            console.count('count');
+            break;
+          case 'Console Warn':
+            console.warn(' warning');
+            break;
+          case 'Console Assert':
+            console.assert(false, 'Assertion failed.');
+            break;
+          case 'Console Clear':
+            console.clear();
+            break;
+          case 'Console Dir':
+            console.dir(document.body);
+            break;
+          case 'Console dirxml':
+            console.dirxml(document.body);
+            break;
+          case 'Console Group Start':
+            console.group('Group');
+            console.log('whtin group.');
+            break;
+          case 'Console Group End':
+            console.log('outside group.');
+            console.groupEnd();
+            break;
+          case 'Console Table':
+            console.table([{ c1: 'c', c2: 2 }, { c1: 'c', c2: 30 }]);
+            break;
+          case 'Start Timer':
+            console.time('Timer');
+            break;
+          case 'End Timer':
+            console.timeEnd('Timer');
+            break;
+          case 'Console Trace':
+            try {
+              console.trace();
+            }catch (e) {
+              console.error(e);
+            }
+            break;
+          case 'Trigger a Global Error':
+              throw new Error(' custom error.');
+            break;
+          default:
+            break;
+        }
+      });
+  });
+  window.onerror = function(message, source, lineno, colno, error) {
+  console.log('an  Error occur');
+};
 
     // Start your code here
-    // You may move this JS to another file if you wish
   </script>
 </body>
 
